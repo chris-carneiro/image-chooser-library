@@ -30,8 +30,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
@@ -49,8 +48,6 @@ public class ImageChooserActivity extends Activity implements
 	private ImageChooserManager imageChooserManager;
 
 	private ProgressBar pbar;
-
-	private AdView adView;
 
 	private String filePath;
 
@@ -84,16 +81,6 @@ public class ImageChooserActivity extends Activity implements
 
 		pbar = (ProgressBar) findViewById(R.id.progressBar);
 		pbar.setVisibility(View.GONE);
-
-        adView = (AdView) findViewById(R.id.adView);
-
-		AdRequest.Builder builder = new AdRequest.Builder();
-        builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(Config.NEXUS_S)
-                .addTestDevice(Config.TEST_DEVICE_ID_2)
-                .addTestDevice(Config.TEST_GALAXY_NEXUS);
-        AdRequest request = builder.build();
-        adView.loadAd(request);
 	}
 
 	private void chooseImage() {
@@ -172,9 +159,6 @@ public class ImageChooserActivity extends Activity implements
 
 	@Override
 	public void onDestroy() {
-		if (adView != null) {
-			adView.destroy();
-		}
 		super.onDestroy();
 	}
 

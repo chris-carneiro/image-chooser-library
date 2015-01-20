@@ -16,8 +16,6 @@
 
 package com.kbeanie.imagechooser.api;
 
-import java.io.File;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -28,6 +26,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.support.v4.app.Fragment;
+
+import java.io.File;
 
 public abstract class BChooser {
     protected Activity activity;
