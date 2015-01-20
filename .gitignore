@@ -21,7 +21,7 @@ gradle/
 # Library
 image-chooser-library/gradle.properties
 image-chooser-library/build
-image-chooser-library/image-chooser-library-image-chooser-library.iml
+image-chooser-library/image-chooser-library.iml
 
 .idea
 .idea/workspace.xml
