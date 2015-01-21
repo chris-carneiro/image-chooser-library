@@ -165,7 +165,7 @@ public class ImagePickerManager extends AbstractPicker implements
 			throw new IllegalArgumentException(
 					"ImagePickerListener cannot be null. Forgot to set ImagePickerListener???");
 		}
-		switch (type) {
+		switch (mType) {
 		case PickerType.REQUEST_PICK_PICTURE:
 			pickPicture();
 			break;
@@ -214,7 +214,7 @@ public class ImagePickerManager extends AbstractPicker implements
 
 	@Override
 	public void submit(int requestCode, Intent data) {
-		if (requestCode != type) {
+		if (requestCode != mType) {
 			onError("onActivityResult requestCode is different from the type the chooser was initialized with.");
 		} else {
 			switch (requestCode) {
