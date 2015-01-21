@@ -11,7 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
-public abstract class ChosenMedia {
+public abstract class PickedMedia {
 
     protected SoftReference<Bitmap> getBitmap(String path) {
         SoftReference<Bitmap> bitmap = null;
@@ -59,5 +59,5 @@ public abstract class ChosenMedia {
 
     public abstract String getMediaHeight();
     
-    public abstract String getMediaWidth();   
+    public abstract String getMediaWidth();
 }

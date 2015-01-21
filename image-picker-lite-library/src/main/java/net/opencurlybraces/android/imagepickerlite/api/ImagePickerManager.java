@@ -38,38 +38,39 @@ import net.opencurlybraces.android.imagepickerlite.threads.ImageProcessorThread;
  * for different devices, OSes and folders.
  * 
  * @author Beanie
+ * Modified by Chris Carneiro
  */
-public class ImageChooserManager extends BChooser implements
+public class ImagePickerManager extends AbstractPicker implements
 		ImageProcessorListener {
-	private final static String TAG = "ImageChooserManager";
+	private final static String TAG = "ImagePickerManager";
 
 	private final static String DIRECTORY = "bimagechooser";
 
-	private ImageChooserListener listener;
+	private ImagePickerListener listener;
 
 	/**
 	 * Simplest constructor. Specify the type
-	 * {@link ChooserType.REQUEST_PICK_PICTURE} or
-	 * {@link ChooserType.REQUEST_CAPTURE_PICTURE}
+	 * {@link PickerType.REQUEST_PICK_PICTURE} or
+	 * {@link PickerType.REQUEST_CAPTURE_PICTURE}
 	 * 
 	 * @param activity
 	 * @param type
 	 */
-	public ImageChooserManager(Activity activity, int type) {
+	public ImagePickerManager(Activity activity, int type) {
 		super(activity, type, DIRECTORY, true);
 	}
 
-	public ImageChooserManager(Fragment fragment, int type) {
+	public ImagePickerManager(Fragment fragment, int type) {
 		super(fragment, type, DIRECTORY, true);
 	}
 
-	public ImageChooserManager(android.app.Fragment fragment, int type) {
+	public ImagePickerManager(android.app.Fragment fragment, int type) {
 		super(fragment, type, DIRECTORY, true);
 	}
 
 	/**
-	 * Specify the type {@link ChooserType.REQUEST_PICK_PICTURE} or
-	 * {@link ChooserType.REQUEST_CAPTURE_PICTURE}
+	 * Specify the type {@link PickerType.REQUEST_PICK_PICTURE} or
+	 * {@link PickerType.REQUEST_CAPTURE_PICTURE}
 	 * <p>
 	 * Optionally, you can control where the exported images with their
 	 * thumbnails would be stored.
@@ -77,24 +78,24 @@ public class ImageChooserManager extends BChooser implements
 	 * 
 	 * @param activity
 	 * @param type
-	 * @param foldername
+	 * @param folderName
 	 */
-	public ImageChooserManager(Activity activity, int type, String foldername) {
-		super(activity, type, foldername, true);
+	public ImagePickerManager(Activity activity, int type, String folderName) {
+		super(activity, type, folderName, true);
 	}
 
-	public ImageChooserManager(Fragment fragment, int type, String foldername) {
-		super(fragment, type, foldername, true);
+	public ImagePickerManager(Fragment fragment, int type, String folderName) {
+		super(fragment, type, folderName, true);
 	}
 
-	public ImageChooserManager(android.app.Fragment fragment, int type,
-			String foldername) {
-		super(fragment, type, foldername, true);
+	public ImagePickerManager(android.app.Fragment fragment, int type,
+                              String folderName) {
+		super(fragment, type, folderName, true);
 	}
 
 	/**
-	 * Specify the type {@link ChooserType.REQUEST_PICK_PICTURE} or
-	 * {@link ChooserType.REQUEST_CAPTURE_PICTURE}
+	 * Specify the type {@link PickerType.REQUEST_PICK_PICTURE} or
+	 * {@link PickerType.REQUEST_CAPTURE_PICTURE}
 	 * <p>
 	 * Optionally, you can set whether you need thumbnail generation or not. If
 	 * not, you would get the original image for the thumbnails as well
@@ -104,47 +105,47 @@ public class ImageChooserManager extends BChooser implements
 	 * @param type
 	 * @param shouldCreateThumbnails
 	 */
-	public ImageChooserManager(Activity activity, int type,
-			boolean shouldCreateThumbnails) {
+	public ImagePickerManager(Activity activity, int type,
+                              boolean shouldCreateThumbnails) {
 		super(activity, type, DIRECTORY, shouldCreateThumbnails);
 	}
 
-	public ImageChooserManager(Fragment fragment, int type,
-			boolean shouldCreateThumbnails) {
+	public ImagePickerManager(Fragment fragment, int type,
+                              boolean shouldCreateThumbnails) {
 		super(fragment, type, DIRECTORY, shouldCreateThumbnails);
 	}
 
-	public ImageChooserManager(android.app.Fragment fragment, int type,
-			boolean shouldCreateThumbnails) {
+	public ImagePickerManager(android.app.Fragment fragment, int type,
+                              boolean shouldCreateThumbnails) {
 		super(fragment, type, DIRECTORY, shouldCreateThumbnails);
 	}
 
 	/**
-	 * Specify the type {@link ChooserType.REQUEST_PICK_PICTURE} or
-	 * {@link ChooserType.REQUEST_CAPTURE_PICTURE}
+	 * Specify the type {@link PickerType.REQUEST_PICK_PICTURE} or
+	 * {@link PickerType.REQUEST_CAPTURE_PICTURE}
 	 * <p>
-	 * Specify your own foldername and whether you want the generated thumbnails
+	 * Specify your own mFolderName and whether you want the generated thumbnails
 	 * or not
 	 * </p>
 	 * 
 	 * @param activity
 	 * @param type
-	 * @param foldername
+	 * @param folderName
 	 * @param shouldCreateThumbnails
 	 */
-	public ImageChooserManager(Activity activity, int type, String foldername,
-			boolean shouldCreateThumbnails) {
-		super(activity, type, foldername, shouldCreateThumbnails);
+	public ImagePickerManager(Activity activity, int type, String folderName,
+                              boolean shouldCreateThumbnails) {
+		super(activity, type, folderName, shouldCreateThumbnails);
 	}
 
-	public ImageChooserManager(Fragment fragment, int type, String foldername,
-			boolean shouldCreateThumbnails) {
-		super(fragment, type, foldername, shouldCreateThumbnails);
+	public ImagePickerManager(Fragment fragment, int type, String folderName,
+                              boolean shouldCreateThumbnails) {
+		super(fragment, type, folderName, shouldCreateThumbnails);
 	}
 
-	public ImageChooserManager(android.app.Fragment fragment, int type,
-			String foldername, boolean shouldCreateThumbnails) {
-		super(fragment, type, foldername, shouldCreateThumbnails);
+	public ImagePickerManager(android.app.Fragment fragment, int type,
+                              String folderName, boolean shouldCreateThumbnails) {
+		super(fragment, type, folderName, shouldCreateThumbnails);
 	}
 
 	/**
@@ -153,38 +154,38 @@ public class ImageChooserManager extends BChooser implements
 	 * 
 	 * @param listener
 	 */
-	public void setImageChooserListener(ImageChooserListener listener) {
+	public void setImagePickerListener(ImagePickerListener listener) {
 		this.listener = listener;
 	}
 
 	@Override
-	public String choose() throws Exception {
+	public String pick() throws Exception {
 		String path = null;
 		if (listener == null) {
 			throw new IllegalArgumentException(
-					"ImageChooserListener cannot be null. Forgot to set ImageChooserListener???");
+					"ImagePickerListener cannot be null. Forgot to set ImagePickerListener???");
 		}
 		switch (type) {
-		case ChooserType.REQUEST_PICK_PICTURE:
-			choosePicture();
+		case PickerType.REQUEST_PICK_PICTURE:
+			pickPicture();
 			break;
-		case ChooserType.REQUEST_CAPTURE_PICTURE:
+		case PickerType.REQUEST_CAPTURE_PICTURE:
 			path = takePicture();
 			break;
 		default:
 			throw new IllegalArgumentException(
-					"Cannot choose a video in ImageChooserManager");
+					"Cannot pick a video in ImagePickerManager");
 		}
 		return path;
 	}
 
-	private void choosePicture() throws Exception {
+	private void pickPicture() throws Exception {
 		checkDirectory();
 		try {
 			Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 			intent.setType("image/*");
-			if (extras != null) {
-				intent.putExtras(extras);
+			if (mExtras != null) {
+				intent.putExtras(mExtras);
 			}
 			startActivity(intent);
 		} catch (ActivityNotFoundException e) {
@@ -196,19 +197,19 @@ public class ImageChooserManager extends BChooser implements
 		checkDirectory();
 		try {
 			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			filePathOriginal = FileUtils.getDirectory(foldername)
+			mOriginalFilePath = FileUtils.getDirectory(mFolderName)
 					+ File.separator + Calendar.getInstance().getTimeInMillis()
 					+ ".jpg";
 			intent.putExtra(MediaStore.EXTRA_OUTPUT,
-					Uri.fromFile(new File(filePathOriginal)));
-			if (extras != null) {
-				intent.putExtras(extras);
+					Uri.fromFile(new File(mOriginalFilePath)));
+			if (mExtras != null) {
+				intent.putExtras(mExtras);
 			}
 			startActivity(intent);
 		} catch (ActivityNotFoundException e) {
 			throw new Exception("Activity not found");
 		}
-		return filePathOriginal;
+		return mOriginalFilePath;
 	}
 
 	@Override
@@ -217,10 +218,10 @@ public class ImageChooserManager extends BChooser implements
 			onError("onActivityResult requestCode is different from the type the chooser was initialized with.");
 		} else {
 			switch (requestCode) {
-			case ChooserType.REQUEST_PICK_PICTURE:
+			case PickerType.REQUEST_PICK_PICTURE:
 				processImageFromGallery(data);
 				break;
-			case ChooserType.REQUEST_CAPTURE_PICTURE:
+			case PickerType.REQUEST_CAPTURE_PICTURE:
 				processCameraImage();
 				break;
 			}
@@ -232,23 +233,23 @@ public class ImageChooserManager extends BChooser implements
 		if (data != null && data.getDataString() != null) {
 			String uri = data.getData().toString();
 			sanitizeURI(uri);
-			if (filePathOriginal == null || TextUtils.isEmpty(filePathOriginal)) {
+			if (mOriginalFilePath == null || TextUtils.isEmpty(mOriginalFilePath)) {
 				onError("File path was null");
 			} else {
 				if (Config.DEBUG) {
-					Log.i(TAG, "File: " + filePathOriginal);
+					Log.i(TAG, "File: " + mOriginalFilePath);
 				}
-				String path = filePathOriginal;
+				String path = mOriginalFilePath;
 				ImageProcessorThread thread = new ImageProcessorThread(path,
-						foldername, shouldCreateThumbnails);
+                        mFolderName, mShouldCreateThumbnails);
 				thread.setListener(this);
 				if (activity != null) {
 					thread.setContext(activity.getApplicationContext());
-				} else if (fragment != null) {
-					thread.setContext(fragment.getActivity()
+				} else if (mFragment != null) {
+					thread.setContext(mFragment.getActivity()
 							.getApplicationContext());
-				} else if (appFragment != null) {
-					thread.setContext(appFragment.getActivity()
+				} else if (mAppFragment != null) {
+					thread.setContext(mAppFragment.getActivity()
 							.getApplicationContext());
 				}
 				thread.start();
@@ -260,15 +261,15 @@ public class ImageChooserManager extends BChooser implements
 	}
 
 	private void processCameraImage() {
-		String path = filePathOriginal;
+		String path = mOriginalFilePath;
 		ImageProcessorThread thread = new ImageProcessorThread(path,
-				foldername, shouldCreateThumbnails);
+                mFolderName, mShouldCreateThumbnails);
 		thread.setListener(this);
 		thread.start();
 	}
 
 	@Override
-	public void onProcessedImage(ChosenImage image) {
+	public void onProcessedImage(PickedImage image) {
 		if (listener != null) {
 			listener.onImageChosen(image);
 		}

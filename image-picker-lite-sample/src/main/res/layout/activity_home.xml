@@ -12,8 +12,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:onClick="gotoImageChooser"
-        android:text="@string/image_chooser"/>
+        android:onClick="gotoImagePicker"
+        android:text="@string/image_picker"/>
 
     <TextView
         android:id="@+id/textViewVersion"

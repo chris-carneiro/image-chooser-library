@@ -13,10 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+
 package net.opencurlybraces.android.imagepickerlite.api;
 
-public interface ChooserType {
-    public final static int REQUEST_PICK_PICTURE = 291;
-    
-    public final static int REQUEST_CAPTURE_PICTURE = 294;
+public interface ImagePickerListener {
+    /**
+     * When the processing is complete, you will receive this callback with
+     * {@link PickedImage}
+     * 
+     * @param image
+     */
+    public void onImageChosen(PickedImage image);
+
+    /**
+     * Handle any error conditions if at all, when you receieve this callback
+     * 
+     * @param reason
+     */
+    public void onError(String reason);
 }

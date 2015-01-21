@@ -66,50 +66,50 @@ public abstract class MediaProcessorThread extends Thread {
 
     private final static int THUMBNAIL_SMALL = 2;
 
-    protected String filePath;
+    protected String mFilePath;
 
-    protected Context context;
+    protected Context mContext;
 
-    protected String foldername;
+    protected String mFolderName;
 
-    protected boolean shouldCreateThumnails;
+    protected boolean mShouldCreateThumbnails;
 
-    protected String mediaExtension;
+    protected String mMediaExtension;
 
-    public MediaProcessorThread(String filePath, String foldername,
+    public MediaProcessorThread(String filePath, String folderName,
                                 boolean shouldCreateThumbnails) {
-        this.filePath = filePath;
-        this.foldername = foldername;
-        this.shouldCreateThumnails = shouldCreateThumbnails;
+        this.mFilePath = filePath;
+        this.mFolderName = folderName;
+        this.mShouldCreateThumbnails = shouldCreateThumbnails;
     }
 
     public void setContext(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     public void setMediaExtension(String extension) {
-        this.mediaExtension = extension;
+        this.mMediaExtension = extension;
     }
 
     protected void downloadAndProcess(String url) throws Exception {
-        filePath = downloadFile(url);
+        mFilePath = downloadFile(url);
         process();
     }
 
     protected void process() throws IOException, Exception {
-        if (!filePath.contains(foldername)) {
+        if (!mFilePath.contains(mFolderName)) {
             copyFileToDir();
         }
     }
 
     protected String[] createThumbnails(String image) throws Exception {
         String[] images = new String[2];
-        images[0] = getThumnailPath(image);
+        images[0] = getThumbnailPath(image);
         images[1] = getThumbnailSmallPath(image);
         return images;
     }
 
-    private String getThumnailPath(String file) throws Exception {
+    private String getThumbnailPath(String file) throws Exception {
         if (Config.DEBUG) {
             Log.i(TAG, "Compressing ... THUMBNAIL");
         }
@@ -209,8 +209,8 @@ public abstract class MediaProcessorThread extends Thread {
     private void copyFileToDir() throws Exception {
         try {
             File file;
-            file = new File(Uri.parse(filePath).getPath());
-            File copyTo = new File(FileUtils.getDirectory(foldername)
+            file = new File(Uri.parse(mFilePath).getPath());
+            File copyTo = new File(FileUtils.getDirectory(mFolderName)
                     + File.separator + file.getName());
             FileInputStream streamIn = new FileInputStream(file);
             BufferedOutputStream outStream = new BufferedOutputStream(
@@ -222,7 +222,7 @@ public abstract class MediaProcessorThread extends Thread {
             }
             streamIn.close();
             outStream.close();
-            filePath = copyTo.getAbsolutePath();
+            mFilePath = copyTo.getAbsolutePath();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new Exception("File not found");
@@ -244,9 +244,9 @@ public abstract class MediaProcessorThread extends Thread {
             HttpResponse response = client.execute(getRequest);
             InputStream stream = response.getEntity().getContent();
 
-            localFilePath = FileUtils.getDirectory(foldername) + File.separator
+            localFilePath = FileUtils.getDirectory(mFolderName) + File.separator
                     + Calendar.getInstance().getTimeInMillis() + "."
-                    + mediaExtension;
+                    + mMediaExtension;
             File localFile = new File(localFilePath);
 
             FileOutputStream fileOutputStream = new FileOutputStream(localFile);
@@ -275,7 +275,7 @@ public abstract class MediaProcessorThread extends Thread {
     protected void manageDiretoryCache(final int maxDirectorySize,
                                        final int maxThresholdDays, final String extension) {
         File directory = null;
-        directory = new File(FileUtils.getDirectory(foldername));
+        directory = new File(FileUtils.getDirectory(mFolderName));
         File[] files = directory.listFiles();
         long count = 0;
         if (files == null) {
@@ -327,14 +327,14 @@ public abstract class MediaProcessorThread extends Thread {
             Log.i(TAG, "Picasa Started");
         }
         try {
-            InputStream inputStream = context.getContentResolver()
+            InputStream inputStream = mContext.getContentResolver()
                     .openInputStream(Uri.parse(path));
 
-            filePath = FileUtils.getDirectory(foldername) + File.separator
+            mFilePath = FileUtils.getDirectory(mFolderName) + File.separator
                     + Calendar.getInstance().getTimeInMillis() + extension;
 
             BufferedOutputStream outStream = new BufferedOutputStream(
-                    new FileOutputStream(filePath));
+                    new FileOutputStream(mFilePath));
             byte[] buf = new byte[2048];
             int len;
             while ((len = inputStream.read(buf)) > 0) {
@@ -369,10 +369,10 @@ public abstract class MediaProcessorThread extends Thread {
         }
         try {
 
-            filePath = FileUtils.getDirectory(foldername) + File.separator
+            mFilePath = FileUtils.getDirectory(mFolderName) + File.separator
                     + Calendar.getInstance().getTimeInMillis() + extension;
 
-            ParcelFileDescriptor parcelFileDescriptor = context
+            ParcelFileDescriptor parcelFileDescriptor = mContext
                     .getContentResolver().openFileDescriptor(Uri.parse(path),
                             "r");
 
@@ -384,7 +384,7 @@ public abstract class MediaProcessorThread extends Thread {
             BufferedInputStream reader = new BufferedInputStream(inputStream);
 
             BufferedOutputStream outStream = new BufferedOutputStream(
-                    new FileOutputStream(filePath));
+                    new FileOutputStream(mFilePath));
             byte[] buf = new byte[2048];
             int len;
             while ((len = reader.read(buf)) > 0) {
@@ -415,7 +415,7 @@ public abstract class MediaProcessorThread extends Thread {
         // one row. There's no need to filter, sort, or select fields, since we
         // want
         // all fields for one document.
-        Cursor cursor = context.getContentResolver().query(uri, null, null,
+        Cursor cursor = mContext.getContentResolver().query(uri, null, null,
                 null, null);
 
         try {
@@ -464,14 +464,14 @@ public abstract class MediaProcessorThread extends Thread {
             throws Exception {
         checkExtension(Uri.parse(path));
         try {
-            InputStream inputStream = context.getContentResolver()
+            InputStream inputStream = mContext.getContentResolver()
                     .openInputStream(Uri.parse(path));
 
-            filePath = FileUtils.getDirectory(foldername) + File.separator
+            mFilePath = FileUtils.getDirectory(mFolderName) + File.separator
                     + Calendar.getInstance().getTimeInMillis() + extension;
 
             BufferedOutputStream outStream = new BufferedOutputStream(
-                    new FileOutputStream(filePath));
+                    new FileOutputStream(mFilePath));
             byte[] buf = new byte[2048];
             int len;
             while ((len = inputStream.read(buf)) > 0) {
@@ -516,7 +516,7 @@ public abstract class MediaProcessorThread extends Thread {
                 .startsWith("content://com.microsoft.skydrive.content.external")) {
             filePath = imageUri.toString();
         } else {
-            Cursor cursor = context.getContentResolver().query(imageUri, proj,
+            Cursor cursor = mContext.getContentResolver().query(imageUri, proj,
                     null, null, null);
             cursor.moveToFirst();
             filePath = cursor.getString(cursor
@@ -526,7 +526,7 @@ public abstract class MediaProcessorThread extends Thread {
 
         if( filePath == null && isDownloadsDocument(imageUri) ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-                filePath = getPath(context, imageUri);
+                filePath = getPath(mContext, imageUri);
         }
         return filePath;
     }

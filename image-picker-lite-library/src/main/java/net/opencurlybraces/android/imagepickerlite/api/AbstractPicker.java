@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * Modified by Chris Carneiro
  *******************************************************************************/
 
 package net.opencurlybraces.android.imagepickerlite.api;
@@ -29,45 +31,45 @@ import android.support.v4.app.Fragment;
 
 import java.io.File;
 
-public abstract class BChooser {
+public abstract class AbstractPicker {
     protected Activity activity;
 
-    protected Fragment fragment;
+    protected Fragment mFragment;
 
-    protected android.app.Fragment appFragment;
+    protected android.app.Fragment mAppFragment;
 
-    protected int type;
+    protected int mType;
 
-    protected String foldername;
+    protected String mFolderName;
 
-    protected boolean shouldCreateThumbnails;
+    protected boolean mShouldCreateThumbnails;
 
-    protected String filePathOriginal;
+    protected String mOriginalFilePath;
 
-    protected Bundle extras;
+    protected Bundle mExtras;
 
-    public BChooser(Activity activity, int type, String foldername,
-                    boolean shouldCreateThumbnails) {
+    public AbstractPicker(Activity activity, int type, String folderName,
+                          boolean shouldCreateThumbnails) {
         this.activity = activity;
-        this.type = type;
-        this.foldername = foldername;
-        this.shouldCreateThumbnails = shouldCreateThumbnails;
+        this.mType = type;
+        this.mFolderName = folderName;
+        this.mShouldCreateThumbnails = shouldCreateThumbnails;
     }
 
-    public BChooser(Fragment fragment, int type, String foldername,
-                    boolean shouldCreateThumbnails) {
-        this.fragment = fragment;
-        this.type = type;
-        this.foldername = foldername;
-        this.shouldCreateThumbnails = shouldCreateThumbnails;
+    public AbstractPicker(Fragment fragment, int type, String folderName,
+                          boolean shouldCreateThumbnails) {
+        this.mFragment = fragment;
+        this.mType = type;
+        this.mFolderName = folderName;
+        this.mShouldCreateThumbnails = shouldCreateThumbnails;
     }
 
-    public BChooser(android.app.Fragment fragment, int type, String foldername,
-                    boolean shouldCreateThumbnails) {
-        this.appFragment = fragment;
-        this.type = type;
-        this.foldername = foldername;
-        this.shouldCreateThumbnails = shouldCreateThumbnails;
+    public AbstractPicker(android.app.Fragment fragment, int type, String folderName,
+                          boolean shouldCreateThumbnails) {
+        this.mAppFragment = fragment;
+        this.mType = type;
+        this.mFolderName = folderName;
+        this.mShouldCreateThumbnails = shouldCreateThumbnails;
     }
 
     /**
@@ -86,7 +88,7 @@ public abstract class BChooser {
      * @throws IllegalArgumentException
      * @throws Exception
      */
-    public abstract String choose() throws IllegalArgumentException, Exception;
+    public abstract String pick() throws IllegalArgumentException, Exception;
 
     /**
      * Call this method to process the result from within your onActivityResult
@@ -100,7 +102,7 @@ public abstract class BChooser {
 
     protected void checkDirectory() {
         File directory = null;
-        directory = new File(FileUtils.getDirectory(foldername));
+        directory = new File(FileUtils.getDirectory(mFolderName));
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -109,29 +111,29 @@ public abstract class BChooser {
     @SuppressLint("NewApi")
     protected void startActivity(Intent intent) {
         if (activity != null) {
-            activity.startActivityForResult(intent, type);
-        } else if (fragment != null) {
-            fragment.startActivityForResult(intent, type);
-        } else if (appFragment != null) {
-            appFragment.startActivityForResult(intent, type);
+            activity.startActivityForResult(intent, mType);
+        } else if (mFragment != null) {
+            mFragment.startActivityForResult(intent, mType);
+        } else if (mAppFragment != null) {
+            mAppFragment.startActivityForResult(intent, mType);
         }
     }
 
     public void reinitialize(String path) {
-        filePathOriginal = path;
+        mOriginalFilePath = path;
     }
 
     // Change the URI only when the returned string contains "file:/" prefix.
     // For all the other situations the URI doesn't need to be changed
     protected void sanitizeURI(String uri) {
-        filePathOriginal = uri;
+        mOriginalFilePath = uri;
         // Picasa on Android < 3.0
         if (uri.matches("https?://\\w+\\.googleusercontent\\.com/.+")) {
-            filePathOriginal = uri;
+            mOriginalFilePath = uri;
         }
         // Local storage
         if (uri.startsWith("file://")) {
-            filePathOriginal = uri.substring(7);
+            mOriginalFilePath = uri.substring(7);
         }
     }
 
@@ -139,10 +141,10 @@ public abstract class BChooser {
     protected Context getContext() {
         if (activity != null) {
             return activity.getApplicationContext();
-        } else if (fragment != null) {
-            return fragment.getActivity().getApplicationContext();
-        } else if (appFragment != null) {
-            return appFragment.getActivity().getApplicationContext();
+        } else if (mFragment != null) {
+            return mFragment.getActivity().getApplicationContext();
+        } else if (mAppFragment != null) {
+            return mAppFragment.getActivity().getApplicationContext();
         }
 
         return null;
@@ -167,7 +169,7 @@ public abstract class BChooser {
     }
 
     public void setExtras(Bundle extras) {
-        this.extras = extras;
+        this.mExtras = extras;
     }
 
     public long queryProbableFileSize(Uri uri, Context context) {

@@ -25,11 +25,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="net.opencurlybraces.android.imagepickersample.ImageChooserActivity"
+            android:name=".ImagePickerActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="net.opencurlybraces.android.imagepickersample.FragmentImageChooserActivity"
+            android:name=".FragmentImagePickerActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

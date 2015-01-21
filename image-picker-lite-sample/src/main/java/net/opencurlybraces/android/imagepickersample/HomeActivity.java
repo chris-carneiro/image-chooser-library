@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.beanie.imagechooserapp.R;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
@@ -36,8 +35,8 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
     }
 
-    public void gotoImageChooser(View view) {
-        Intent intent = new Intent(this, ImageChooserActivity.class);
+    public void gotoImagePicker(View view) {
+        Intent intent = new Intent(this, ImagePickerActivity.class);
         startActivity(intent);
     }
 

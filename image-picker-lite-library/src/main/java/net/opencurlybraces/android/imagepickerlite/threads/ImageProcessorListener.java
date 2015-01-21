@@ -16,10 +16,10 @@
 
 package net.opencurlybraces.android.imagepickerlite.threads;
 
-import net.opencurlybraces.android.imagepickerlite.api.ChosenImage;
+import net.opencurlybraces.android.imagepickerlite.api.PickedImage;
 
 public interface ImageProcessorListener {
-    public void onProcessedImage(ChosenImage image);
+    public void onProcessedImage(PickedImage image);
 
     public void onError(String reason);
 }
