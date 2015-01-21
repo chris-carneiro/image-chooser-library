@@ -20,11 +20,11 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.beanie.imagechooserapp"
+        applicationId "net.opencurlybraces.android.imagepickersample"
         minSdkVersion 9
         targetSdkVersion 21
         versionCode 52
-        versionName "1.4.01"
+        versionName "1.0"
     }
     buildTypes {
         release {
