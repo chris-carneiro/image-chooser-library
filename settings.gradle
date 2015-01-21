@@ -1,1 +1,1 @@
-include ':app', ':image-chooser-library'
+include ':image-picker-lite-sample', ':image-picker-lite-library'

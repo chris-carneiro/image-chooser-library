@@ -19,12 +19,13 @@ app/crashlytics.properties
 gradle/
 
 # Library
-image-chooser-library/gradle.properties
-image-chooser-library/build
-image-chooser-library/image-chooser-library.iml
+image-picker-library/gradle.properties
+image-picker-library/build
+image-picker-library/image-picker-lite-library.iml
+image-picker-library/image-picker-lite-sample.iml
 
 .idea
 .idea/workspace.xml
 
-image-chooser-library.iml
-ImageChooserApp.iml
+image-picker-lite-library.iml
+image-picker-lite-sample.iml
