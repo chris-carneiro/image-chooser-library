@@ -29,6 +29,8 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.support.v4.app.Fragment;
 
+import net.opencurlybraces.android.imagepickerlite.api.utils.FileUtils;
+
 import java.io.File;
 
 public abstract class AbstractPicker {

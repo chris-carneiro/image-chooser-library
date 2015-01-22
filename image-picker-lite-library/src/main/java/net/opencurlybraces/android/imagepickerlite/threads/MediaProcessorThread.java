@@ -56,7 +56,7 @@ import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.util.Log;
 
-import net.opencurlybraces.android.imagepickerlite.api.FileUtils;
+import net.opencurlybraces.android.imagepickerlite.api.utils.FileUtils;
 import net.opencurlybraces.android.imagepickerlite.api.config.Config;
 
 public abstract class MediaProcessorThread extends Thread {

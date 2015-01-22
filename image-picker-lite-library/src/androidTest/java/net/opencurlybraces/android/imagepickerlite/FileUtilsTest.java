@@ -2,7 +2,7 @@ package net.opencurlybraces.android.imagepickerlite;
 
 import android.test.AndroidTestCase;
 
-import net.opencurlybraces.android.imagepickerlite.api.FileUtils;
+import net.opencurlybraces.android.imagepickerlite.api.utils.FileUtils;
 
 /**
  * Created by chris on 22/01/15.

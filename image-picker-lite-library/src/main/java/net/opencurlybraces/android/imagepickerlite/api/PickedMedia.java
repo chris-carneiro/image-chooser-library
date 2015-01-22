@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
+import net.opencurlybraces.android.imagepickerlite.api.utils.FileUtils;
+
 public abstract class PickedMedia {
 
     protected SoftReference<Bitmap> getBitmap(String path) {

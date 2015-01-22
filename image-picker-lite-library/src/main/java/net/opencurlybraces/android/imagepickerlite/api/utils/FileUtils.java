@@ -16,7 +16,7 @@
  * Modified by Chris Carneiro
  *******************************************************************************/
 
-package net.opencurlybraces.android.imagepickerlite.api;
+package net.opencurlybraces.android.imagepickerlite.api.utils;
 
 import java.io.File;
 

@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import net.opencurlybraces.android.imagepickerlite.api.config.Config;
+import net.opencurlybraces.android.imagepickerlite.api.utils.FileUtils;
 import net.opencurlybraces.android.imagepickerlite.threads.ImageProcessorListener;
 import net.opencurlybraces.android.imagepickerlite.threads.ImageProcessorThread;
 
