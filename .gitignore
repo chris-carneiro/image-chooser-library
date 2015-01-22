@@ -16,8 +16,6 @@ app/app.iml
 app/crashlytics.properties
 
 
-gradle/
-
 # Library
 image-picker-library/gradle.properties
 image-picker-library/build

@@ -9,7 +9,9 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
 allprojects {
     repositories {
         jcenter()

@@ -2,6 +2,19 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
 
+buildscript {
+    repositories {
+        maven { url 'http://repo1.maven.org/maven2' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.+'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -13,7 +26,11 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
+            testCoverageEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
